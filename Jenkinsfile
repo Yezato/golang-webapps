@@ -47,8 +47,8 @@ pipeline {
                     echo 'Running linting'
                     sh 'golint .'
                     echo 'Running test'
-                    sh 'go test ./...  -coverpkg=./... -coverprofile ./coverage.out'
-                    sh 'go tool cover -func ./coverage.out'          
+                    //sh 'go test ./...  -coverpkg=./... -coverprofile ./coverage.out'
+                    //sh 'go tool cover -func ./coverage.out'          
                 }
             }
             
