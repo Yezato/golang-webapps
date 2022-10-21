@@ -43,7 +43,7 @@ pipeline {
                 steps {
                     echo 'Testing'
                     echo 'Running vetting'
-                    sh 'go vet .'
+                    //sh 'go vet .'
                     echo 'Running linting'
                     sh 'golint .'
                     echo 'Running test'
