@@ -7,6 +7,7 @@ pipeline {
 
         environment{
             //DOCKERHUB_CREDENTIALS=credentials('dockerhub-cred')
+            DOCKER_REPO = 'FILE_DOCKER'
             doError = '0'
             GIT_REPO_NAME = env.GIT_URL.replaceFirst(/^.*\/([^\/]+?).git$/, '$1')
         }
@@ -64,17 +65,6 @@ pipeline {
                     sh 'docker build . -t ${DOCKER_REPO}:${GIT_REPO_NAME}-${BUILD_NUMBER}-SNAPSHOT'
                 }
             }
-            stage('Push Docker Image') {
-                 when {
-                     branch 'development'
-                 }
-                steps {
-                    echo 'Pushing to ECR (Snapshot)...'
-                    sh '''
-                    docker tag ${DOCKER_REPO}:${GIT_REPO_NAME}-${BUILD_NUMBER}-SNAPSHOT ${ECR_REPO}/${DOCKER_REPO}:${GIT_REPO_NAME}-${BUILD_NUMBER}-SNAPSHOT
-                    docker push ${ECR_REPO}/${DOCKER_REPO}:${GIT_REPO_NAME}-${BUILD_NUMBER}-SNAPSHOT
-                    '''
-                }
-            }
+           
         }
     }
